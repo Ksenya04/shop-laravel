@@ -246,7 +246,7 @@
                 </div>
 
                 <input type="submit" class="button-form" value="Обновить">
-                <button type="submit" class="button-form" value={{ Auth::user()->logout }}>Выйти</button>
+                <a type="submit" class="button-form" href="/logout">Выйти</a>
             </form>
         </div>
     @else

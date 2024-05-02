@@ -12,7 +12,7 @@ Route::group(['middleware' => ['guest']], function () {
     Route::post('/reg', [RegistrationController::class, 'register'])->name('register');
 });
 Route::group(['middleware' => ['auth']], function () {
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });

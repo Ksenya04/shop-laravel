@@ -301,7 +301,6 @@
             display: flex;
             position: absolute;
             top: 90px;
-            width: 100%;
             left: 80px;
             margin: 0px;
         }
@@ -310,7 +309,6 @@
             display: flex;
             position: absolute;
             top: 320px;
-            width: 100%;
             left: 80px;
         }
 
