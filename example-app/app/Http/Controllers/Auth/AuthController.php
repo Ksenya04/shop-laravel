@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Request\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,11 +27,11 @@ class AuthController extends Controller
         $request->session()->regenerate();
         Auth::login($request->user());
 
-        return redirect()->route('home');
+        return redirect()->route('welcome');
     }
 
     public function logout(){
         Auth::logout();
-        return redirect()->route('home');
+        return redirect()->route('welcome');
     }
 }

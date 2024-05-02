@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>ЧайТека/sale</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -220,14 +220,23 @@
                     </div>
                 </div>
                 <a href="/sale" class="dropbtn">АКЦИИ</a>
-                    <a href="/shop" class="dropbtn">МАГАЗИНЫ</a>
+                <a href="/shop" class="dropbtn">МАГАЗИНЫ</a>
             </div>
             <a href="/">
                 <img src="logotip.png" alt="ЧайТека"
                     style="margin-top: 15px; text-align:center; margin-right: 90px; margin-left: 20px">
             </a>
             <div class="header-links" style="margin-rignt: 100px; margin-left: 400px">
-                <img src="ri_user-line.svg" alt="Аккаунт" style="margin-top: 23px">
+                @if (Auth::check())
+                    <h2 style="margin-top: 36px">{{ Auth::user()->FIO }}</h2>
+                    <a href="/profile">
+                        <img src="ri_user-line.svg" alt="Аккаунт" style="margin-top: 40px">
+                    </a>
+                @else
+                    <a href="/reg">
+                        <img src="ri_user-line.svg" alt="Аккаунт" style="margin-top: 23px">
+                    </a>
+                @endif
                 <img src="favorite.svg" alt="Сердечко" style="margin-top: 15px">
                 <img src="shopping_cart.svg" alt="Корзина" style="margin-top: 15px">
             </diV>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('/catalog', function () {
     return view('catalog');
@@ -29,6 +29,10 @@ Route::get('/sale', function () {
 Route::get('/shop', function () {
     return view('shop');
 });
+
+Route::get('/profile', function () {
+    return view('profile');
+})->name('profile');
 
 require_once __DIR__ . '/auth.php';
 

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>ЧайТека/login</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -213,6 +213,7 @@
 
     <div class="login-container">
         <form class="login-form" method="POST">
+            @csrf
             <h1>Авторизация</h1>
             <div class="form-group">
                 <label for="email">Email:</label>

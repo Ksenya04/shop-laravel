@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>ЧайТека/shop</title>
+    <title>ЧайТека/profile</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -87,6 +87,14 @@
             font-family: 'Russo One', sans-serif;
             font-size: 20px;
             color: #412C15;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .else {
+            font-family: 'Russo One', sans-serif;
+            font-size: 20px;
+            color: #412C15;
             margin-top: 120px;
             text-align: center;
         }
@@ -113,23 +121,69 @@
             color: #fff;
         }
 
-        .map-conteiner {
-            gap: 250px;
+        .update-container {
             display: flex;
-            font-family: 'Russo One', sans-serif;
-            margin: 60px 20px 100px 80px;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            margin: 100px 80px 100px 530px;
         }
 
-        .map-conteiner a {
+        .update-form {
+            background-color: #fff;
+            border-radius: 28px;
+            padding: 40px;
+            margin-bottom: 16px;
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-group {
+            color: #412C15;
             font-family: 'Russo One', sans-serif;
             font-size: 20px;
-            color: #412C15;
         }
 
-        .map-conteiner p {
+        .form-group input {
+            border-radius: 0.9375em;
+            padding: 1em 6.300000000000001em;
+            margin-top: 2px;
+        }
+
+        .button-form {
+            background-color: #7B6143;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border: 2px solid #7B6143;
             font-family: 'Russo One', sans-serif;
-            font-size: 14px;
-            color: #7B6143;
+            font-size: 20px;
+            border-radius: 0.9375em;
+            display: inline-block;
+            font-weight: 600;
+            line-height: normal;
+            outline: none;
+            padding: 1em 2.3em;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .button-form:disabled {
+            pointer-events: none;
+        }
+
+        .button-form:hover {
+            color: #fff;
+            background-color: #EB5412;
+            border: 2px solid #EB5412;
+            box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+            transform: translateY(-2px);
+        }
+
+        .button-form:active {
+            box-shadow: none;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -171,23 +225,33 @@
             </header>
     </main>
 
-    <h1>МАГАЗИНЫ</h1>
+    <section>
+    @if (Auth::check())
+        <div class="update-container">
+            <form class="update-form" method="POST">
+                @csrf
+                @method('PATCH')
+                <h1>Обновление данных {{ Auth::user()->nickname }} </h1>
+                <div class="form-group">
+                    <label for="FIO">ФИО или ник:</label><br>
+                    <input type="text" id="FIO" name="FIO" value={{ Auth::user()->FIO }}>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email" value={{ Auth::user()->email }}>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль:</label><br>
+                    <input type="password" id="password" name="password">
+                </div>
 
-    <section class="map-conteiner">
-        <div>
-            <a>г. Санкт-Петербург, Петергофское шоссе,<br /> д. 51 А, ТЦ «Жемчужная Плаза»,<br /> цокольный этаж</a>
-            <p>Время работы: с 10-00 до 20-00</p>
-            <a>+7(964)311-50-77</a>
-            <hr>
-            <a>г. Калининград, ул. Профессора Баранова,<br /> 30, ТЦ ЭПИЦЕНТР</a>
-            <p>Время работы: с 10-00 до 20-00</p>
-            <a>+7(964)311-50-77</a>
+                <input type="submit" class="button-form" value="Обновить">
+                <button type="submit" class="button-form" value={{ Auth::user()->logout }}>Выйти</button>
+            </form>
         </div>
-        <div>
-            <script type="text/javascript" charset="utf-8" async
-                src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Abdee1a25fe837d47e23b5a23687b651c6c42f0579a0ee232b9010e1ce93a0eae&amp;width=600&amp;height=600&amp;lang=ru_RU&amp;scroll=true">
-            </script>
-        </div>
+    @else
+        <p class="else">Сначала авторизируйтесь!</p>
+    @endif
     </section>
 
     <footer class="footer-f">
