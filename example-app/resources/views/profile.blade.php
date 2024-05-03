@@ -233,7 +233,7 @@
                 @method('PATCH')
                 <h1>Обновление данных {{ Auth::user()->nickname }} </h1>
                 <div class="form-group">
-                    <label for="FIO">ФИО или ник:</label><br>
+                    <label for="FIO">Имя или ник:</label><br>
                     <input type="text" id="FIO" name="FIO" value={{ Auth::user()->FIO }}>
                 </div>
                 <div class="form-group">
@@ -270,13 +270,13 @@
             <div>
                 <a>Контакты</a>
                 <div style="cursor: pointer">
-                    <a href="/">
+                    <a href="https://t.me/shio_mii">
                         <img class="" src="Vector.svg">
                     </a>
-                    <a href="/">
+                    <a href="https://vk.com/shio_mi">
                         <img class="" src="ion_logo-vk.svg">
                     </a>
-                    <a href="/">
+                    <a href="https://discordapp.com/users/832618763865948200">
                         <img class="" src="carbon_logo-discord.svg">
                     </a>
                 </div>

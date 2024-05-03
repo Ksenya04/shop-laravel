@@ -204,7 +204,9 @@
                     style="margin-top: 15px; text-align:center; margin-right: 90px; margin-left: 20px">
             </a>
             <div class="header-links" style="margin-rignt: 100px; margin-left: 400px">
-                <img src="ri_user-line.svg" alt="Аккаунт" style="margin-top: 23px">
+                <a href="/login">
+                    <img src="ri_user-line.svg" alt="Аккаунт" style="margin-top: 23px">
+                </a>
                 <img src="favorite.svg" alt="Сердечко" style="margin-top: 15px">
                 <img src="shopping_cart.svg" alt="Корзина" style="margin-top: 15px">
             </diV>
@@ -217,7 +219,7 @@
             @csrf
             <h1>Регистрация</h1>
             <div class="form-group">
-                <label for="FIO">ФИО:</label>
+                <label for="FIO">Имя:</label>
                 <input type="text" id="FIO" name="FIO" required>
             </div>
             <div class="form-group">
@@ -248,13 +250,13 @@
             <div>
                 <a>Контакты</a>
                 <div style="cursor: pointer">
-                    <a href="/">
+                    <a href="https://t.me/shio_mii">
                         <img class="" src="Vector.svg">
                     </a>
-                    <a href="/">
+                    <a href="https://vk.com/shio_mi">
                         <img class="" src="ion_logo-vk.svg">
                     </a>
-                    <a href="/">
+                    <a href="https://discordapp.com/users/832618763865948200">
                         <img class="" src="carbon_logo-discord.svg">
                     </a>
                 </div>

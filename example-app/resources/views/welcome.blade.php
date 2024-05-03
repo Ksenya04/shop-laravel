@@ -366,6 +366,9 @@
                         </a>
                     @else
                         <a href="/reg">
+                            <img src="CrAccount.svg" alt="Аккаунт создание" style="margin-top: 24px">
+                        </a>
+                        <a href="/login">
                             <img src="ri_user-line.svg" alt="Аккаунт" style="margin-top: 23px">
                         </a>
                     @endif
@@ -531,13 +534,13 @@
             <div>
                 <a>Контакты</a>
                 <div style="cursor: pointer">
-                    <a href="/">
+                    <a href="https://t.me/shio_mii">
                         <img class="" src="Vector.svg">
                     </a>
-                    <a href="/">
+                    <a href="https://vk.com/shio_mi">
                         <img class="" src="ion_logo-vk.svg">
                     </a>
-                    <a href="/">
+                    <a href="https://discordapp.com/users/832618763865948200">
                         <img class="" src="carbon_logo-discord.svg">
                     </a>
                 </div>
