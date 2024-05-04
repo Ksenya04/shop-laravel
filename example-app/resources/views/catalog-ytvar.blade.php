@@ -108,16 +108,6 @@
             width: 100%;
         }
 
-        .discount {
-            color: #412C15;
-            font-family: 'Russo One', sans-serif;
-            font-size: 20px;
-        }
-
-        .favorite {
-            cursor: pointer;
-        }
-
         .card-title {
             font-size: 24px;
             margin-top: 0;
@@ -132,9 +122,10 @@
             margin-bottom: 16px;
         }
 
-        .stars {
-            color: #EB5412;
-            font-size: 35px;
+        .discount {
+            color: #412C15;
+            font-family: 'Russo One', sans-serif;
+            font-size: 20px;
         }
 
         .add-to-cart {
@@ -249,107 +240,49 @@
     <section>
         <h1>КАТАЛОГ/ЧАЙНАЯ УТВАРЬ</h1>
         <div class="card-container">
-            <div class="card">
-                <div class="card-top">
-                    <span class="discount">Скидка 15%</span>
-                    <img class="favorite" src="favorite.svg">
+            @foreach ($products as $product)
+                <div class="card">
+                    <div class="card-top">
+                        <span class="discount">Скидка 15%</span>
+                        <img class="favorite" src="favorite.svg">
+                    </div>
+                    <img src="{{ asset('tea-black.png') }}" alt="">
+                    <h2 class="card-title">{{ $product->name }}</h2>
+                    <p class="card-title">{{ $product->price }} р.</p>
+                    @if (Auth::check())
+                        <form action="{{ route('add.to.cart', $product) }}" method="POST">
+                            @csrf
+                            <button class="add-to-cart" type="submit">В корзину</button>
+                        </form>
+                    @else
+                        <a class="add-to-cart" href="{{ route('register') }}">В корзину</a>
+                    @endif
                 </div>
-                <img class="card-image" src="tea-black.png" alt="Tea">
-                <h2 class="card-title">Tea Time</h2>
-                <div class="stars">
-                    ★★★★★
-                </div>
-                <button class="add-to-cart">В корзину</button>
-            </div>
-            <div class="card">
-                <div class="card-top">
-                    <span class="discount">Скидка 15%</span>
-                    <img class="favorite" src="favorite.svg">
-                </div>
-                <img class="card-image" src="tea-black.png" alt="Tea">
-                <h2 class="card-title">Tea Time</h2>
-                <div class="stars">
-                    ★★★★★
-                </div>
-                <button class="add-to-cart">В корзину</button>
-            </div>
-            <div class="card">
-                <div class="card-top">
-                    <span class="discount">Скидка 15%</span>
-                    <img class="favorite" src="favorite.svg">
-                </div>
-                <img class="card-image" src="tea-black.png" alt="Tea">
-                <h2 class="card-title">Tea Time</h2>
-                <div class="stars">
-                    ★★★★★
-                </div>
-                <button class="add-to-cart">В корзину</button>
-            </div>
-            <div class="card">
-                <div class="card-top">
-                    <span class="discount">Скидка 15%</span>
-                    <img class="favorite" src="favorite.svg">
-                </div>
-                <img class="card-image" src="tea-black.png" alt="Tea">
-                <h2 class="card-title">Tea Time</h2>
-                <div class="stars">
-                    ★★★★★
-                </div>
-                <button class="add-to-cart">В корзину</button>
-            </div>
+            @endforeach
         </div>
     </section>
 
     <section>
         <div class="card-container">
-            <div class="card">
-                <div class="card-top">
-                    <span class="discount">Скидка 15%</span>
-                    <img class="favorite" src="favorite.svg">
+            @foreach ($products as $product)
+                <div class="card">
+                    <div class="card-top">
+                        <span class="discount">Скидка 15%</span>
+                        <img class="favorite" src="favorite.svg">
+                    </div>
+                    <img src="{{ asset('tea-black.png') }}" alt="">
+                    <h2 class="card-title">{{ $product->name }}</h2>
+                    <p class="card-title">{{ $product->price }} р.</p>
+                    @if (Auth::check())
+                        <form action="{{ route('add.to.cart', $product) }}" method="POST">
+                            @csrf
+                            <button class="add-to-cart" type="submit">В корзину</button>
+                        </form>
+                    @else
+                        <a class="add-to-cart" href="{{ route('register') }}">В корзину</a>
+                    @endif
                 </div>
-                <img class="card-image" src="tea-black.png" alt="Tea">
-                <h2 class="card-title">Tea Time</h2>
-                <div class="stars">
-                    ★★★★★
-                </div>
-                <button class="add-to-cart">В корзину</button>
-            </div>
-            <div class="card">
-                <div class="card-top">
-                    <span class="discount">Скидка 15%</span>
-                    <img class="favorite" src="favorite.svg">
-                </div>
-                <img class="card-image" src="tea-black.png" alt="Tea">
-                <h2 class="card-title">Tea Time</h2>
-                <div class="stars">
-                    ★★★★★
-                </div>
-                <button class="add-to-cart">В корзину</button>
-            </div>
-            <div class="card">
-                <div class="card-top">
-                    <span class="discount">Скидка 15%</span>
-                    <img class="favorite" src="favorite.svg">
-                </div>
-                <img class="card-image" src="tea-black.png" alt="Tea">
-                <h2 class="card-title">Tea Time</h2>
-                <div class="stars">
-                    ★★★★★
-                </div>
-                <button class="add-to-cart">В корзину</button>
-            </div>
-            <div class="card">
-                <div class="card-top">
-                    <span class="discount">Скидка 15%</span>
-                    <img class="favorite" src="favorite.svg">
-                </div>
-                <img class="card-image" src="tea-black.png" alt="Tea">
-                <h2 class="card-title">Tea Time</h2>
-                <div class="stars">
-                    ★★★★★
-                </div>
-                <button class="add-to-cart">В корзину</button>
-            </div>
+            @endforeach
         </div>
     </section>
 
