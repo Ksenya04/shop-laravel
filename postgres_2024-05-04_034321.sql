@@ -61,6 +61,40 @@ CREATE TABLE public.cache_locks (
 ALTER TABLE public.cache_locks OWNER TO postgres;
 
 --
+-- Name: carts; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.carts (
+    id bigint NOT NULL,
+    user_id character varying(255),
+    product_id bigint
+);
+
+
+ALTER TABLE public.carts OWNER TO postgres;
+
+--
+-- Name: carts_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.carts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.carts_id_seq OWNER TO postgres;
+
+--
+-- Name: carts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.carts_id_seq OWNED BY public.carts.id;
+
+
+--
 -- Name: failed_jobs; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -96,6 +130,42 @@ ALTER SEQUENCE public.failed_jobs_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE public.failed_jobs_id_seq OWNED BY public.failed_jobs.id;
+
+
+--
+-- Name: favorites; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.favorites (
+    id bigint NOT NULL,
+    product_id bigint NOT NULL,
+    user_id bigint,
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE public.favorites OWNER TO postgres;
+
+--
+-- Name: favorites_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.favorites_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.favorites_id_seq OWNER TO postgres;
+
+--
+-- Name: favorites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.favorites_id_seq OWNED BY public.favorites.id;
 
 
 --
@@ -205,6 +275,43 @@ CREATE TABLE public.password_reset_tokens (
 ALTER TABLE public.password_reset_tokens OWNER TO postgres;
 
 --
+-- Name: products; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.products (
+    id bigint NOT NULL,
+    name character varying(255) NOT NULL,
+    description character varying(255),
+    photo character varying(255),
+    price character varying(255) NOT NULL,
+    stock integer
+);
+
+
+ALTER TABLE public.products OWNER TO postgres;
+
+--
+-- Name: products_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.products_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.products_id_seq OWNER TO postgres;
+
+--
+-- Name: products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.products_id_seq OWNED BY public.products.id;
+
+
+--
 -- Name: sessions; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -260,10 +367,24 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: carts id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.carts ALTER COLUMN id SET DEFAULT nextval('public.carts_id_seq'::regclass);
+
+
+--
 -- Name: failed_jobs id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.failed_jobs ALTER COLUMN id SET DEFAULT nextval('public.failed_jobs_id_seq'::regclass);
+
+
+--
+-- Name: favorites id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.favorites ALTER COLUMN id SET DEFAULT nextval('public.favorites_id_seq'::regclass);
 
 
 --
@@ -278,6 +399,13 @@ ALTER TABLE ONLY public.jobs ALTER COLUMN id SET DEFAULT nextval('public.jobs_id
 --
 
 ALTER TABLE ONLY public.migrations ALTER COLUMN id SET DEFAULT nextval('public.migrations_id_seq'::regclass);
+
+
+--
+-- Name: products id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products ALTER COLUMN id SET DEFAULT nextval('public.products_id_seq'::regclass);
 
 
 --
@@ -304,10 +432,26 @@ COPY public.cache_locks (key, owner, expiration) FROM stdin;
 
 
 --
+-- Data for Name: carts; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.carts (id, user_id, product_id) FROM stdin;
+\.
+
+
+--
 -- Data for Name: failed_jobs; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.failed_jobs (id, uuid, connection, queue, payload, exception, failed_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: favorites; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.favorites (id, product_id, user_id, created_at, updated_at) FROM stdin;
 \.
 
 
@@ -335,6 +479,9 @@ COPY public.migrations (id, migration, batch) FROM stdin;
 1	0001_01_01_000000_create_users_table	1
 2	0001_01_01_000001_create_cache_table	1
 3	0001_01_01_000002_create_jobs_table	1
+4	2024_04_13_064855_create_products_table	1
+5	2024_04_13_064911_create_carts_table	1
+6	2024_04_17_192224_create_favorites_table	1
 \.
 
 
@@ -347,12 +494,23 @@ COPY public.password_reset_tokens (email, token, created_at) FROM stdin;
 
 
 --
+-- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.products (id, name, description, photo, price, stock) FROM stdin;
+1	Хей Най Сян	Черный чай	\N	440	\N
+2	Искристый Цейлон	Черный чай	\N	380	\N
+3	Красный Кимун	Черный чай	\N	325	\N
+4	Хармутти FTGFOP	Черный чай	\N	625	\N
+\.
+
+
+--
 -- Data for Name: sessions; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.sessions (id, user_id, ip_address, user_agent, payload, last_activity) FROM stdin;
-tJu3AfltPVFxzhtVuQ8oY7eKXm6uIppV0mIeqkRZ	\N	127.0.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 OPR/107.0.0.0 (Edition Yx GX)	YTozOntzOjY6Il90b2tlbiI7czo0MDoiTHJIb3o4bzhFaVZDc2I3TVlkUmE0T1Bram1oU1NWZkt4VzlMQWx6YiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=	1714696997
-20ud7O6kID2mEOw4zbeW28TAsyOdA5inKOMQckm7	\N	127.0.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 OPR/107.0.0.0 (Edition Yx GX)	YTozOntzOjY6Il90b2tlbiI7czo0MDoiNDFlUmJoWURmTVpaakFwTGpmQ2NVeFZPYnBMNzJSZ1luakFNZlFqVyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=	1714755640
+DnitNnYND74CGYg2QyX9S204zt4eRTyT2ITzhSvl	\N	127.0.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 OPR/107.0.0.0 (Edition Yx GX)	YTozOntzOjY6Il90b2tlbiI7czo0MDoiQ0FOakYwRVNzV1k5V3B1YTdoTGF0b21VMHdQSDNFWFBnTzM4aUkxSCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=	1714783385
 \.
 
 
@@ -361,12 +519,15 @@ tJu3AfltPVFxzhtVuQ8oY7eKXm6uIppV0mIeqkRZ	\N	127.0.0.1	Mozilla/5.0 (Windows NT 10
 --
 
 COPY public.users (id, "FIO", email, email_verified_at, password, remember_token, created_at, updated_at) FROM stdin;
-1	Фиолетовый Кролик Берни	Ksyndeli.h.kek@gmail.com	\N	$2y$12$PFcCG3.DkMvuErVEXJcrReeXXrzmu.pf4nbxtYAkjCmSu04YQVfRO	\N	2024-04-25 21:55:33	2024-04-25 21:55:33
-2	Adfdfsdf FSDFsdfsd DFsdfsdf	123@gmail.com	\N	$2y$12$p1/bWoOLW2msgaGvAPDUbuHe0yn.CelfrAADrSFnCBZ/1bz/aiK5W	\N	2024-05-01 12:32:53	2024-05-01 12:32:53
-4	shio	12@gmail.com	\N	$2y$12$z/mTNlBW6z6RBidUhB7fSuWvlcZIVvb7Fb29CPTkaCqHrP7YtZ4zi	\N	2024-05-01 22:10:50	2024-05-02 00:15:53
-5	www	1234@gmail.com	\N	$2y$12$6AAmlX7153fxPAvGUJ56u.VX9YNGDqZzRl/snrsDY.bCcoYWhy69y	\N	2024-05-02 15:40:48	2024-05-02 15:41:22
-6	1	1@gmail.com	\N	$2y$12$kS8IZy.3ydPrwWfMZS1TA.ZN5ZwS90IKF8l.uANRCkHs/rFHOQwfS	\N	2024-05-02 23:04:48	2024-05-02 23:04:48
+1	www	123@gmail.com	\N	$2y$12$TksFvmhuEkTj.UImRta9G.F2MfhUcUpKmjUSXIc78uxl4fb2JRZaO	\N	2024-05-03 23:14:13	2024-05-03 23:14:13
 \.
+
+
+--
+-- Name: carts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.carts_id_seq', 7, true);
 
 
 --
@@ -374,6 +535,13 @@ COPY public.users (id, "FIO", email, email_verified_at, password, remember_token
 --
 
 SELECT pg_catalog.setval('public.failed_jobs_id_seq', 1, false);
+
+
+--
+-- Name: favorites_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.favorites_id_seq', 1, false);
 
 
 --
@@ -387,14 +555,21 @@ SELECT pg_catalog.setval('public.jobs_id_seq', 1, false);
 -- Name: migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.migrations_id_seq', 3, true);
+SELECT pg_catalog.setval('public.migrations_id_seq', 6, true);
+
+
+--
+-- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.products_id_seq', 4, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 6, true);
+SELECT pg_catalog.setval('public.users_id_seq', 1, true);
 
 
 --
@@ -414,6 +589,14 @@ ALTER TABLE ONLY public.cache
 
 
 --
+-- Name: carts carts_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.carts
+    ADD CONSTRAINT carts_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: failed_jobs failed_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -427,6 +610,14 @@ ALTER TABLE ONLY public.failed_jobs
 
 ALTER TABLE ONLY public.failed_jobs
     ADD CONSTRAINT failed_jobs_uuid_unique UNIQUE (uuid);
+
+
+--
+-- Name: favorites favorites_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.favorites
+    ADD CONSTRAINT favorites_pkey PRIMARY KEY (id);
 
 
 --
@@ -459,6 +650,14 @@ ALTER TABLE ONLY public.migrations
 
 ALTER TABLE ONLY public.password_reset_tokens
     ADD CONSTRAINT password_reset_tokens_pkey PRIMARY KEY (email);
+
+
+--
+-- Name: products products_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products
+    ADD CONSTRAINT products_pkey PRIMARY KEY (id);
 
 
 --
@@ -504,6 +703,22 @@ CREATE INDEX sessions_last_activity_index ON public.sessions USING btree (last_a
 --
 
 CREATE INDEX sessions_user_id_index ON public.sessions USING btree (user_id);
+
+
+--
+-- Name: favorites favorites_product_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.favorites
+    ADD CONSTRAINT favorites_product_id_foreign FOREIGN KEY (product_id) REFERENCES public.products(id) ON DELETE SET NULL;
+
+
+--
+-- Name: favorites favorites_user_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.favorites
+    ADD CONSTRAINT favorites_user_id_foreign FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE SET NULL;
 
 
 --
