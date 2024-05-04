@@ -369,7 +369,7 @@
                             <img src="shopping_cart.svg" alt="Корзина" style="margin-top: 41px">
                         </a>
                     @else
-                        <img src="shopping_cart.svg" alt="Корзина" style="margin-top: 23px">
+                        <img src="shopping_cart.svg" alt="Корзина" style="margin-top: 15px">
                     @endif
                 </diV>
             </header>
